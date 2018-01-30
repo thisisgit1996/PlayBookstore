@@ -13,4 +13,16 @@ class Application extends Controller {
     Ok(views.html.navbar())
   }
 
+  def signInUp = Action {
+    Ok(views.html.signInUp())
+  }
+
+  def login = Action {
+    Ok(views.html.index())
+  }
+
+  def carouselBS = Action {
+    Ok(views.html.carouselBestSellers())
+  }
+
 }
