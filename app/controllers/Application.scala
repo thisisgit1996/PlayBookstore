@@ -1,12 +1,23 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
+import javax.inject.Inject
 
-class Application extends Controller {
+import models.Customer
+import models.Customer._
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
+import play.api.mvc._
+import play.api.mvc.Cookie
+import play.api.mvc.DiscardingCookie
+
+class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   def index = Action {
     Ok(views.html.index())
+  }
+
+  def storeFinder = Action {
+    Ok(views.html.storeFinder())
   }
 
   def navbar = Action {
@@ -14,15 +25,27 @@ class Application extends Controller {
   }
 
   def signInUp = Action {
-    Ok(views.html.signInUp())
+    Ok(views.html.signInUp(Customer.createCustomerForm))
   }
 
-  def login = Action {
-    Ok(views.html.index())
+  def loginPost = Action {implicit request: Request[AnyContent] =>
+
+    Customer.createCustomerForm.bindFromRequest.fold(
+      { formWithErrors =>
+        BadRequest(views.html.signInUp(formWithErrors))
+      },
+      { aCustomer =>
+        customers.append(aCustomer)
+        Ok(views.html.loginSuccess()).withCookies(Cookie("User", aCustomer.email))
+      })
   }
 
   def carouselBS = Action {
     Ok(views.html.carouselBestSellers())
+  }
+
+  def trump = Action {
+    Ok(views.html.trump())
   }
 
 }
