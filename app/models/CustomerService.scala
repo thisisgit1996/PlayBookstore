@@ -10,7 +10,7 @@ class CustomerService {
     aCustomer match {
       case null => "Customer not added. Customer passed in was null"
       case _ => {
-        customerMap(aCustomer.getEmail()) = aCustomer;
+        customerMap(aCustomer.email) = aCustomer
         "Customer successfully added"
       }
     }

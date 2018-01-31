@@ -1,16 +1,24 @@
 package models
 
-class Customer(var email: String, var password: String) {
+import play.api.data.Form
+import play.api.data.Forms._
 
-  def getEmail(): String = {this.email}
-  def getPassword(): String = {this.password}
+import scala.collection.mutable.ArrayBuffer
 
-  def setEmail(emal: String): Unit = {
-    this.email = emal
-  }
+case class Customer(var email: String, var password: String)
 
-  def setPassword(pazzword: String): Unit = {
-    this.password = pazzword
-  }
+object Customer {
 
+  val createCustomerForm = Form(
+    mapping(
+      "email" -> email,
+      "password" -> nonEmptyText
+    )(Customer.apply)(Customer.unapply)
+  )
+
+  val customers = ArrayBuffer(
+    Customer("leo@gmail.com", "lpass"),
+    Customer("jordan@gmail.com", "jpass"),
+    Customer("andy@gmail.com", "apass")
+  )
 }
