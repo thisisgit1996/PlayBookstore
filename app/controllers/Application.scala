@@ -21,15 +21,14 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
   }
 
   def navbar = Action {
-    Ok(views.html.navbar("ee"))
+    Ok(views.html.navbar(""))
   }
 
   def signInUp = Action {
     Ok(views.html.signInUp(Customer.createCustomerForm))
   }
 
-  def signUp = Action {implicit request: Request[AnyContent] =>
-
+  def signUp = Action { implicit request: Request[AnyContent] =>
     Customer.createCustomerForm.bindFromRequest.fold(
       { formWithErrors =>
         BadRequest(views.html.signInUp(formWithErrors))
@@ -37,6 +36,7 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
       { aCustomer =>
         customers.append(aCustomer)
         Ok(views.html.loginSuccess()).withCookies(Cookie("User", aCustomer.email))
+
       })
   }
 

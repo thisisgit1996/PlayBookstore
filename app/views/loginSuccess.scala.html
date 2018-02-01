@@ -1,5 +1,9 @@
+@()(implicit request: Request[AnyContent])
 
+@blah = {
+    @request.cookies.get("User").getOrElse("")
+}
 
-@main("Home", "") {
+@main("Home", blah.toString.split(",")(1)) {
     Login Successful!
 }
