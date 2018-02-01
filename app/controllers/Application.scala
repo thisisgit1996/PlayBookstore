@@ -16,7 +16,7 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
     Ok(views.html.index())
   }
 
-  def storeFinder = Action {
+  def storeFinder = Action {implicit request: Request[AnyContent] =>
     Ok(views.html.storeFinder())
   }
 

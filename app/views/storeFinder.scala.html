@@ -1,5 +1,9 @@
+@()(implicit request: Request[AnyContent])
 
+@blah = {
+@request.cookies.get("User").getOrElse("")
+}
 
-@main("Store Finder", "") {
+@main("Store Finder", blah.toString.split(",")(1)) {
     Store Finder
 }
