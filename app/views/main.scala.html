@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, user: String)(content: Html)
 
 <!DOCTYPE html>
 
@@ -14,7 +14,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        @navbar.apply()
+        @navbar.apply(user)
         @content
     </body>
 </html>
