@@ -1,7 +1,8 @@
 @(form: Form[Customer])(implicit messages: Messages)
 
 
-@main("SignInUp","") {
+
+@main("SignInUp", "") {
 
     @helper.form(routes.Application.signUp()) {
         @helper.inputText(form("email"), 'id -> "SomeId", 'class -> "SomeClass")
