@@ -14,7 +14,7 @@ GET         /sign_in_up          controllers.Application.signInUp
 
 GET         /bestsellers         controllers.Application.carouselBS
 
-POST        /sign_in_up          controllers.Application.loginPost
+POST        /sign_in_up          controllers.Application.signUp
 
 GET         /store_finder        controllers.Application.storeFinder
 

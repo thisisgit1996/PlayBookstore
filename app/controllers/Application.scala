@@ -21,14 +21,14 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
   }
 
   def navbar = Action {
-    Ok(views.html.navbar())
+    Ok(views.html.navbar("ee"))
   }
 
   def signInUp = Action {
     Ok(views.html.signInUp(Customer.createCustomerForm))
   }
 
-  def loginPost = Action {implicit request: Request[AnyContent] =>
+  def signUp = Action {implicit request: Request[AnyContent] =>
 
     Customer.createCustomerForm.bindFromRequest.fold(
       { formWithErrors =>
